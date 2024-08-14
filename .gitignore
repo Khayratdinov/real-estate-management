@@ -80,7 +80,7 @@ cover/
 
 # Translations
 *.mo
-
+.vscode
 # Django stuff:
 
 # Flask stuff:
