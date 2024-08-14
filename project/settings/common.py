@@ -38,9 +38,22 @@ DJANGO_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
 ]
 
-THIRD_PARTY_APPS = []
+THIRD_PARTY_APPS = [
+    "rest_framework",
+    "django_countries",
+    "phonenumber_field",
+    "djoser",
+    "drf_yasg",
+    "social_django",
+    "taggit",
+    "cloudinary",
+    "django_celery_beat",
+    "django_filters",
+    "djcelery_email",
+]
 
 LOCAL_APPS = ["project.apps.core"]
 
@@ -85,6 +98,13 @@ DATABASES = {
 }
 
 
+PASSWORD_HASHERS = [
+    "django.contrib.auth.hashers.Argon2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
+    "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
+    "django.contrib.auth.hashers.ScryptPasswordHasher",
+]
 # ============================ PASSWORD VALIDATION =========================== #
 
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -115,6 +135,8 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 
 USE_TZ = True
+
+SITE_ID = 1
 
 
 # =============================== STATIC FILES =============================== #
@@ -158,3 +180,6 @@ if importlib.util.find_spec("debug_toolbar"):
 
     # Set INTERNAL_IPS to allow local access to the debug_toolbar
     INTERNAL_IPS = ["127.0.0.1"]
+
+
+TAGGIT_CASE_INSENSITIVE = True
