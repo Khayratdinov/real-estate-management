@@ -55,7 +55,7 @@ THIRD_PARTY_APPS = [
     "djcelery_email",
 ]
 
-LOCAL_APPS = [
+LOCAL_APPS = ['project.apps.posts', 'project.apps.ratings', 'project.apps.profiles', 'project.apps.common', 'project.apps.users', 'project.apps.issues', 
     "project.apps.core",
 ]
 
