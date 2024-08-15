@@ -8,7 +8,8 @@ env = environ.Env(DEBUG=(bool, False))
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 PROJECT_DIR = ROOT_DIR / "project"
-environ.Env.read_env(os.path.join(ROOT_DIR, ".env"))
+
+environ.Env.read_env(os.path.join(ROOT_DIR, ".envs/.env.local"))
 
 
 # Quick-start development settings - unsuitable for production
@@ -18,8 +19,7 @@ environ.Env.read_env(os.path.join(ROOT_DIR, ".env"))
 
 
 #  Add SECRET_KEY to .env and delete it ⤵
-SECRET_KEY = "1u_l2m)cay%%)jki^)6%)r$1)qyeh=%uljcs6k^4w0gj_*1ek%"
-# SECRET_KEY = env("SECRET_KEY")
+SECRET_KEY = env("DJANGO_SECRET_KEY")
 
 
 DEBUG = True
@@ -55,7 +55,13 @@ THIRD_PARTY_APPS = [
     "djcelery_email",
 ]
 
-LOCAL_APPS = ['project.apps.posts', 'project.apps.ratings', 'project.apps.profiles', 'project.apps.common', 'project.apps.users', 'project.apps.issues', 
+LOCAL_APPS = [
+    "project.apps.posts",
+    "project.apps.ratings",
+    "project.apps.profiles",
+    "project.apps.common",
+    "project.apps.users",
+    "project.apps.issues",
     "project.apps.core",
 ]
 
@@ -92,10 +98,22 @@ TEMPLATES = [
 WSGI_APPLICATION = "project.wsgi.application"
 
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": ROOT_DIR / "db.sqlite3",
+#     }
+# }
+
+
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": ROOT_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": env("POSTGRES_DB"),
+        "USER": env("POSTGRES_USER"),
+        "PASSWORD": env("POSTGRES_PASSWORD"),
+        "HOST": env("POSTGRES_HOST"),
+        "PORT": env("POSTGRES_PORT"),
     }
 }
 
@@ -185,3 +203,22 @@ if importlib.util.find_spec("debug_toolbar"):
 
 
 TAGGIT_CASE_INSENSITIVE = True
+
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "%(levelname)s %(name)-12s %(asctime)s %(module)s %(process)d %(thread)d %(message)s"
+        }
+    },
+    "handlers": {
+        "console": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+            "formatter": "verbose",
+        }
+    },
+    "root": {"level": "INFO", "handlers": ["console"]},
+}
