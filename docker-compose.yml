@@ -81,7 +81,8 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ./staticfiles:/app/staticfiles
+      - static_volume:/app/staticfiles
+      - media_volume:/app/media
       - logs_store:/var/log/nginx
     depends_on:
       - api
