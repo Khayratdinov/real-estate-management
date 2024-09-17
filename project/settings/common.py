@@ -12,8 +12,8 @@ env = environ.Env(DEBUG=(bool, False))
 ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 PROJECT_DIR = ROOT_DIR / "project"
 
-environ.Env.read_env(os.path.join(ROOT_DIR, ".envs/.env.local"))
 
+environ.Env.read_env(os.path.join(ROOT_DIR, ".envs/.env.local"))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -275,7 +275,7 @@ COOKIE_NAME = "access"
 COOKIE_SAMESITE = "Lax"
 COOKIE_PATH = "/"
 COOKIE_HTTPONLY = True
-COOKIE_SECURE = env("COOKIE_SECURE", "True") == "True"
+COOKIE_SECURE = env("COOKIE_SECURE", default="False") == "True"
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
@@ -316,17 +316,25 @@ DJOSER = {
     "PASSWORD_RESET_CONFIRM_RETYPE": True,
     "ACTIVATION_URL": "activate/{uid}/{token}",
     "PASSWORD_RESET_CONFIRM_URL": "password-reset/{uid}/{token}",
-    "SOCIAL_AUTH_ALLOWED_REDIRECT_URIS": env("REDIRECT_URIS", "").split(","),
+    # "SOCIAL_AUTH_ALLOWED_REDIRECT_URIS": env("REDIRECT_URIS", "").split(","),
     "SERIALIZERS": {
         "user_create": "project.apps.users.serializers.CreateUserSerializer",
     },
 }
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = env("GOOGLE_CLIENT_ID")
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = env("GOOGLE_CLIENT_SECRET")
-SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
-    "https://www.googleapis.com/auth/userinfo.email",
-    "https://www.googleapis.com/auth/userinfo.profile",
-    "openid",
-]
-SOCIAL_AUTH_GOOGLE_OAUTH2_EXTRA_DATA = ["first_name", "last_name"]
+
+# SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = env("GOOGLE_CLIENT_ID")
+# SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = env("GOOGLE_CLIENT_SECRET")
+# SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
+#     "https://www.googleapis.com/auth/userinfo.email",
+#     "https://www.googleapis.com/auth/userinfo.profile",
+#     "openid",
+# ]
+# SOCIAL_AUTH_GOOGLE_OAUTH2_EXTRA_DATA = ["first_name", "last_name"]
+
+ADMIN_URL = env("DJANGO_ADMIN_URL")
+EMAIL_BACKEND = "djcelery_email.backends.CeleryEmailBackend"
+EMAIL_HOST = env("EMAIL_HOST")
+EMAIL_PORT = env("EMAIL_PORT")
+DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
+DOMAIN = env("DOMAIN")
