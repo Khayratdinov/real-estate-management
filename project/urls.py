@@ -31,6 +31,7 @@ urlpatterns = [
     path("api/v1/auth/", include("djoser.urls")),
     path("api/v1/auth/", include("project.apps.users.urls")),
     path("api/v1/apartments/", include("project.apps.apartments.urls")),
+    path("api/v1/issues/", include("project.apps.issues.urls")),
 ]
 
 

@@ -165,6 +165,7 @@ USE_TZ = True
 SITE_ID = 1
 
 
+SITE_NAME = "Apartment Review"
 # =============================== STATIC FILES =============================== #
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
