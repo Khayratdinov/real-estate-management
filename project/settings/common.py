@@ -61,6 +61,7 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
+    'project.apps.reports',
     "project.apps.apartments",
     "project.apps.posts",
     "project.apps.ratings",
