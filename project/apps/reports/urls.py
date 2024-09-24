@@ -1,10 +1,7 @@
-"""
-URL configuration for reports app.
-"""
-
 from django.urls import path
-from . import views
+from .views import ReportCreateAPIView, ReportListAPIView
 
 urlpatterns = [
-    # Add your URL patterns here
+    path("create/", ReportCreateAPIView.as_view(), name="create-report"),
+    path("me/", ReportListAPIView.as_view(), name="my-reports"),
 ]
