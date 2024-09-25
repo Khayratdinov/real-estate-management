@@ -2,8 +2,10 @@ from autoslug import AutoSlugField
 from cloudinary.models import CloudinaryField
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.db.models import Avg
 from django.utils.translation import gettext_lazy as _
 from django_countries.fields import CountryField
+
 from phonenumber_field.modelfields import PhoneNumberField
 
 # Create your models here.
@@ -68,3 +70,7 @@ class Profile(TimeStampedModel):
     def save(self, *args, **kwargs):
         self.update_reputation()
         super().save(*args, **kwargs)
+
+    def get_average_rating(self):
+        average = self.user.received_ratings.aggregate(Avg("rating"))["rating__avg"]
+        return average if average is not None else 0.0
