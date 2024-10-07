@@ -24,3 +24,5 @@ export default function layout({ children }: LayoutProps) {
 		</main>
 	);
 }
+
+// npm i react-hook-form@7.50.1 @hookform/resolvers@3.3.4 zod@3.22.4 react-toastify@10.0.4 react-redux@9.1.0 @reduxjs
