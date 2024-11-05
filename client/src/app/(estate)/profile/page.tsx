@@ -9,9 +9,11 @@ import About from "@/components/profile/About";
 import Posts from "@/components/profile/Posts";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import Issues from "@/components/profile/Issues";
+import AssignedIssues from "@/components/profile/AssignedIssues";
 
 export const metadata: Metadata = {
-	title: "Alpha Apartments | User Profile",
+	title: "NP Apartments | User Profile",
 	description: "Signed in users can view all their profile information",
 };
 
@@ -52,8 +54,10 @@ function ProfilePageContent() {
 						<Posts />
 
 						{/* issue tab content */}
+						<Issues />
 						{/* report tab content */}
 						{/* assigned Issue tab content */}
+						<AssignedIssues />
 					</Tabs>
 				</div>
 			</div>
